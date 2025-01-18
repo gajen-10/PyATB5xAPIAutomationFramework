@@ -3,9 +3,11 @@
 import json
 import requests
 
-def get_request(url, auth):
-    response=requests.get(url=url,auth=auth)
-    return  response.json()
+def get_request(url,headers,in_json):
+    response=requests.get(url=url,headers=headers)
+    if in_json is True:
+        return response.json()
+    return response
 
 
 def post_request(url,auth,headers,payload,in_json):
@@ -25,3 +27,9 @@ def put_request(url,auth,headers,payload,in_json):
     if in_json == True:
         return put_response.json()
     return put_response
+
+def delete_requests(url, headers, auth, in_json):
+    delete_response_data = requests.delete(url=url, headers=headers, auth=auth)
+    if in_json is True:
+        return delete_response_data.json()
+    return delete_response_data
